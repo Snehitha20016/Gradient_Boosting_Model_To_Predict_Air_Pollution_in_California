@@ -276,41 +276,6 @@ The near-zero mean residual indicates an unbiased model. Negative skewness sugge
 
 ---
 
-# Project Structure
-
-```
-MATH699P/
-├── Data/
-│   ├── processed_data/
-│   │   ├── ozone_processed.csv
-│   │   ├── site_metadata.csv
-│   │   └── model_ready_dask/
-│   │       ├── train/
-│   │       ├── val/
-│   │       ├── test/
-│   │       └── preprocessing.pkl
-│   └── model_outputs/
-│       ├── models/
-│       │   ├── lightgbm_ozone_model.txt
-│       │   └── lightgbm_ozone_model.pkl
-│       ├── results/
-│       │   ├── model_metrics.csv
-│       │   ├── feature_importance.csv
-│       │   ├── training_report.txt
-│       │   └── evaluation_report.txt
-│       └── plots/
-│           ├── lightgbm_results.png
-│           ├── timeseries_sample.png
-│           └── residual_analysis.png
-├── Notebooks/
-│   ├── data_extraction.ipynb
-│   ├── feature_engineering.ipynb
-│   ├── model_preparation.ipynb
-│   ├── lightgbm_training.ipynb
-│   └── model_evaluation.ipynb
-└── README.md
-```
-
 ---
 
 # Requirements
