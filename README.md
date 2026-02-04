@@ -6,7 +6,7 @@
 # CHAPTER 1: INTRODUCTION
 
 ## 1.1 Background and Motivation
-Air pollution is one of the most critical environmental challenges of the 21st century, affecting billions of people and causing millions of premature deaths annually. According to the WHO, ambient air pollution results in approximately **4.2 million deaths per year**. Among major pollutants, *ground-level ozone (O₃)* is particularly harmful—negatively impacting respiratory health, reducing crop yields, and damaging ecosystems.
+Air pollution is one of the most critical environmental challenges of the 21st century. Among major pollutants, *ground-level ozone (O₃)* is particularly harmful—negatively impacting respiratory health, reducing crop yields, and damaging ecosystems.
 
 Ground-level ozone is a **secondary pollutant**, formed through nonlinear photochemical reactions involving **NOx**, **VOCs**, and **sunlight**. Its concentration varies across space and time, shaped by meteorology, emissions, and atmospheric chemistry, making accurate ozone prediction both highly challenging and crucial for air quality management.
 
