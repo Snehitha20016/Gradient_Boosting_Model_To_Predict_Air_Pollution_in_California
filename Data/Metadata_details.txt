@@ -1,0 +1,358 @@
+CLOUD_EVENT Table:
+
+Contains 744 records with detailed cloud event measurements
+Primary keys: SITE_ID, DATEOFF, SAMPLE_NUM
+Tracks individual cloud sampling events with chemical composition, fluxes, and field measurements
+Last updated: 4/12/2011
+
+CLOUD_MONTH Table:
+
+Contains 49 records with monthly aggregated cloud data
+Primary keys: SITE_ID, YEAR, MONTH
+Aggregates cloud measurements by month including deposition totals and cloud fraction statistics
+Last updated: 4/12/2011
+
+Both tables include measurements of various ions (H, CA, MG, K, NA, NH4, SO4, NO3, CL), deposition fluxes, and physical parameters like wind speed, liquid water content, and sample volumes.
+
+DRYCHEM Table:
+
+Contains 157,939 records of dry deposition measurements
+Primary key: LAB_KEY
+Last updated: 9/30/2025
+Tracks particulate and gaseous air pollutants collected on different filter types:
+
+Teflon filters: SO4, NO3, NH4, and cations (Ca, Mg, Na, K, Cl)
+Nylon filters: SO4 and HNO3 (nitric acid)
+Whatman filters: SO2 and NO3
+
+
+Includes calculated totals for SO2 and NO3
+Features extensive quality control flags and comment codes
+Sample types: Day (D), Night (N), Composite (A, B), Continuous (C), Colocated (H)
+
+This table complements the cloud water deposition data (CLOUD_EVENT and CLOUD_MONTH) to provide a complete picture of atmospheric deposition - both wet (cloud) and dry deposition pathways.
+
+DRYDEP_WEEK_WEB Table:
+
+Contains 149,969 records of weekly dry deposition estimates
+Uses Tuesday-to-Tuesday weekly periods (weeks 1-53)
+Tracks mean concentrations and calculated fluxes for:
+
+SO2, SO4, NO3, HNO3, NH4 (acidic species)
+Ca, Na, Mg, K, Cl (base cations and chloride)
+
+
+Fluxes reported in kg/ha
+Includes % of replaced deposition velocity (Vd) values
+Last updated: 9/30/2025
+
+GAS_CALIBRATION Table:
+
+Contains 384,065 calibration records
+Primary keys: SITE_ID, START_TIME, PARAMETER
+Tracks calibration data for: ozone, SO2, NOy, and CO
+Includes expected vs. measured values
+Extensive quality flags (B, C, D, F, I, K, M, P, S, T, W, _, <)
+Last updated: 7/28/2013
+
+GAS_CALIBRATION_WEB Table:
+
+Contains 123,636 calibration records
+Current/recent data (through 9/30/2025)
+Simplified structure compared to GAS_CALIBRATION
+No CALIBRATION_VALUE_F field
+Includes Level 1 (span check) and Level 4 (precision check) calibrations
+
+GAS_CALIBRATION_WEB_2013 Table:
+
+Historical archive table for 2013 data
+Contains 5,894 records
+Same structure as GAS_CALIBRATION_WEB
+Similar annual archive tables exist from 2013-2025
+
+HISTORIC_AVERAGE Table:
+
+Contains 553,248 records of historical deposition velocity averages
+Calculates averages by SITE_ID, PARAMETER, WEEK, and HOUR
+Requires at least 20 hourly values for inclusion
+Tracks both averaged and raw Vd values with variance statistics
+Includes date range and number of years used in each average
+Last updated: 8/26/2025
+
+HISTORIC_AVERAGE_WEEK Table:
+
+Contains 20,836 records of weekly averaged deposition velocities
+Aggregates by SITE_ID, VD_PARAMETER, and WEEK
+Only includes weeks where all 24 hours have valid data
+Simplified structure compared to HISTORIC_AVERAGE
+Last updated: 8/26/2025
+
+HOURLY_GAS Table (2008):
+
+Contains 33,000 records from 2008
+Primary keys: SITE_ID, DATE_TIME, PARAMETER
+Tracks hourly measurements of:
+
+Nitrogen species: NO, NO2_TRUE, NOX, NOX_TRUE, NOY, NOYDIF, NOY_MINUS, HNO3, TNX
+Other gases: O3 (at multiple heights: 2M, 6M, 10M, 14M, 17M, 20M, 23M, 28M), SO2_GA, CO, NH3
+Meteorological: TEMP_2M, TEMP_23M
+Flow: FLOW_2M, FLOW_23M
+
+
+Values in ppb
+Extensive quality flags (A, B, C, D, F, I, M, N, O, S, U, Z, <)
+Annual archive tables available from 2008-2025
+
+LEAF_ANGLE Table:
+
+Contains 9 records of leaf angle distribution data
+Primary key: LEAF_CLASS
+Used by the Multi-Layer Model (MLM) for canopy modeling
+Tracks:
+
+LEAF_FRACTION: proportion of leaves at each angle class
+LEAF_ANGLE_COSINE: cosine of leaf normal vector to zenith
+
+
+Used to construct the lang.sph file required by MLM
+Last updated: 10/27/2004
+Small reference table for modeling purposes
+
+OZONE Table:
+
+Contains 26,412,001 records of continuous ozone measurements
+Primary keys: SITE_ID, DATE_TIME
+Tracks hourly ozone concentrations in ppb
+Extensive quality flags including:
+
+Instrument issues: B, D, F, H, J (channel down, power failure, malfunction)
+Data quality: I (suspect), P (potential problem), S (out of DQO)
+Special cases: C (calibration), E (exceptional event), T (third party audit)
+Flow/technical: K (non-nominal flow), Y (QC control points)
+Value issues: < (missing <25%), _ (negative reading), ^ (alarm high >120 ppb)
+
+
+QA levels 0-3, plus GS (government shutdown) and X (placeholder)
+Note: Data with QA_CODE < 3 is preliminary and subject to change
+Last updated: 10/2/2025
+
+OZONE_1987 Table:
+
+Contains 70,203 records from 1987
+Annual archive tables available from 1987-2025
+Same structure as main OZONE table
+Historical ozone concentration data
+
+OZONE_QC_WEB Table:
+
+Contains 829,611 calibration records for ozone analyzers
+Tracks expected vs. measured values during calibrations
+Level 1 (span check) and Level 4 (precision check)
+Current data through 10/1/2025
+
+OZONE_QC_WEB_2013 Table:
+
+Contains 52,571 records from 2013
+Annual archive tables available from 2013-2025
+Same structure as OZONE_QC_WEB
+
+PLANT Table:
+
+Contains 84 plant species records
+Primary key: PLANT_ID
+Tracks stomatal resistance parameters:
+
+MIN_STOM, LIGHT_RES_COEFF
+Temperature ranges: OPT_TEMP, MAX/MIN_NO_STRESS_TEMP
+
+
+Physical characteristics: CANOPY_HEIGHT, PROFILE_INDEX
+Used for MLM modeling
+
+PLANT_PROFILE Table:
+
+Contains 63 records of vertical canopy structure
+Primary keys: PROFILE_TYPE, PROFILE_LEVEL
+Describes vertical distribution of leaves in canopy
+Used to construct padprof files (padprof1.20, padprof2.20, padprof3.20) for MLM
+
+PURPLEAIR_WEB Table:
+
+Contains 134,531 records of PM2.5 measurements
+Co-located PurpleAir sensors at CASTNET sites
+Tracks EPA-corrected PM2.5 concentrations (ug/m³)
+Includes humidity and temperature from sensors
+Last updated: 10/3/2025
+
+PURPLEAIR_WEB_2025 Table:
+
+Annual archive for 2025 PurpleAir data
+Same structure as PURPLEAIR_WEB
+
+SITE Table:
+
+Contains 159 site records
+Primary key: SITE_ID
+Comprehensive site metadata:
+
+Location: STATE, COUNTY, LAT/LON (WGS84), ELEVATION
+Site characteristics: LAND_USE, TERRAIN
+Active/inactive sampling types: aerosol (a), dry (d), ozone (o), wet (w), met (m), nephelometer (n)
+Operating agency: EPA, NPS, BLM
+Time zones with/without DST
+MLM applicability assessment
+NADP site linkage
+
+
+Note: Site coordinates updated with more accurate measurements on 2/27/2014
+
+SITE_PLANT_DETAIL Table:
+
+Contains 3,774 records of seasonal plant coverage
+Primary keys: SITE_ID, PLANT_ID, JSTART
+Tracks PERCENT_LEAF by Julian date intervals (JSTART to JEND)
+Describes temporal variation in leaf coverage
+
+SITE_PLANT_SUMMARY Table:
+
+Contains 480 records of site-level plant information
+Primary keys: SITE_ID, PLANT_ID
+Tracks:
+
+PERCENT_COVERAGE: % of total coverage by species
+MAXIMUM_LAI: maximum leaf area index
+WINTER_LAI: winter leaf area index
+
+
+Summary of vegetation characteristics at each site
+
+VISCHEM Table:
+
+Contains 4,248 records of PM2.5 chemical composition
+Primary key: LAB_KEY
+Comprehensive elemental analysis (33 elements):
+
+Major ions: SO4, NO3
+Base cations: Na, Mg, K, Ca
+Trace metals: Al, Si, P, S, Cl, Ti, V, Cr, Mn, Fe, Ni, Cu, Zn, As, Pb, Se, Br, Rb, Sr, Zr, Mo, Co, Ga, Ge, Y, Pd, Ag, Cd, In, Sn, Sb, Ba, La, Hg
+
+
+Carbon fractions: OCTC, OHTC, ECTC, EHTC, TCTC
+Optical properties: FINE_MASS, ABSORPTION
+Filter operations: TFLOW, NFLOW, QFLOW (Teflon, Nylon, Quartz)
+Hours operated: THOURS, NHOURS, QHOURS
+Note: All PM2.5 measurements now performed by IMPROVE program (http://vista.cira.colostate.edu/improve)
+Last updated: 11/3/2004 (archived data)
+
+TOTAL_DEPOSITION_COMPOSITION Table:
+
+Contains 13,056 records of annual total deposition
+Comprehensive deposition budgets by site and year:
+
+Nitrogen species:
+
+Dry: HNO3, NO3, TNO3, NH4, NH3, NOM (modeled), NRED, NOXI
+Wet: NO3, NH4
+Total: NRED, NOXI, N_TOTAL
+
+
+Sulfur species:
+
+Dry: SO2, SO4
+Wet: SO4
+
+
+Base cations: Na, Mg, K, Ca, Cl (wet + dry + total)
+PRECIP (cm)
+
+
+All flux values in kg/ha/yr
+Includes modeled non-measured N from CMAQ
+Last updated: 8/26/2025
+
+TOTAL_DEPOSITION_MLM Table:
+
+Contains 4,351 records of MLM-calculated annual deposition
+Simplified deposition estimates:
+
+Nitrogen: Wet (NH4, NO3), Dry (HNO3, NO3, NH4), Total
+Sulfur: Wet (SO4), Dry (SO2, SO4), Total
+PRECIP (cm)
+
+
+Uses Multi-Layer Model methodology
+All flux values in kg/ha
+Last updated: 8/26/2025
+
+VISNEPH Table:
+
+Contains 171,576 records of light scattering measurements
+Primary keys: SITE_ID, DATE_TIME
+Nephelometer data (October 1993 - June 2002):
+
+BSCAT: particle light scattering with precision estimates
+Interference thresholds: SDM, DELTA, MAX, REL_HUMIDITY
+Calibration: Y_INTERCEPT, SLOPE
+Meteorology: AMBIENT_TEMP, CHAMBER_TEMP, REL_HUMIDITY
+Statistics: averages, standard deviations, counts
+RAWHR: raw hourly averages
+
+
+Extensive quality codes (0, 1, 2, 9) and interference flags (A-O, Z)
+CODE_SUMMARY format: 0123456789mPIOT
+Note: Archived data, now part of IMPROVE program
+Last updated: 11/2/2004
+
+WET_CONCENTRATION Table:
+
+Contains 9,488 records of weekly wet deposition chemistry
+Primary keys: SITE_ID, DATEON, DATEOFF
+Ion concentrations (ug/m³): Ca, Mg, K, Na, NH4, NO3, Cl, SO4
+Solution properties: PH, COND (conductivity)
+Precipitation: RG_PPT (rain gage), TB_PPT (tipping bucket), SUB_PPT (best estimate), SVOL (sample volume)
+Quality codes:
+
+LAB_TYPE: w (>35mL), wa/wd (<35mL diluted), t (trace <10mL), da (dry), qa (QA sample)
+VALCODE: w/wa (valid), d (valid dry), t (valid trace), 0 (invalid)
+INVALCODE: b (bulk), c (contaminated), e (extended), f (field departure), i (incomplete), l (lab error), n (no sample), p (unknown precip), s (short), u (undefined), v (inadequate volume), x (other)
+
+
+Last updated: 8/10/2001
+
+WET_CONCENTRATION_ANNUAL Table:
+
+Contains 206 records of annual precipitation chemistry summaries
+Precipitation-weighted mean concentrations for all ions
+Quality criteria (% valid):
+
+CRITERIA1: % period with valid samples
+CRITERIA2: % period with precipitation data
+CRITERIA3: % precipitation with valid chemistry
+CRITERIA4: collection efficiency
+
+
+Additional metrics: CATION_ANION_RATIO, SAMPLE_VOLUME, PRECIP rate
+Includes PERIOD_START and PERIOD_END dates
+Last updated: 8/26/2025
+
+WETCHEM Table:
+
+Contains 8,774 records of detailed wet deposition samples
+Primary key: LAB_KEY
+Comprehensive field observations:
+
+Equipment status: WETDRY_OK, SENSORHEATING_OK, RAINGAUGE_OK, LID_OPENINGS
+Sample condition: BIRDDROPPINGS, CLOUDY, INSECTS_SOOT_DIRT
+Weights: BUCKET_WEIGHT, LID_WEIGHT, STANDARD_WEIGHT, TOTAL_WEIGHT, SAMPLE_WEIGHT
+
+
+Chemistry (filtered and unfiltered):
+
+Ions: Ca, Mg, K, Na, NO3, Cl, SO4, NH4, NO2
+Solution: PH, PH_UNFILT, CONDUCTIVITY, COND_UNFILT, H, H_UNFILT, ACIDITY
+
+
+Extensive field (F##) and lab (L##) comment codes
+Note: All wet chemistry now performed by NADP (http://nadp.sws.uiuc.edu)
+Last updated: 11/3/2004 (archived data)
+
