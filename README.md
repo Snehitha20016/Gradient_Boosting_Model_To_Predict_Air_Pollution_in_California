@@ -302,7 +302,7 @@ MATH699P/
 │           ├── lightgbm_results.png
 │           ├── timeseries_sample.png
 │           └── residual_analysis.png
-├── notebooks/
+├── Notebooks/
 │   ├── data_extraction.ipynb
 │   ├── feature_engineering.ipynb
 │   ├── model_preparation.ipynb
